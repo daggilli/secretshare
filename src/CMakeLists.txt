@@ -1,10 +1,15 @@
-cmake_minimum_required(VERSION 3.29)
+cmake_minimum_required(VERSION 3.17...4.1)
 set(CMAKE_CXX_STANDARD 26)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 project(SecretShare LANGUAGES CXX VERSION 0.0.1 DESCRIPTION "C++ class to perform secret sharing")
 
-add_compile_options(-Wall -Wunused -Wnrvo)
+if(CMAKE_GENERATOR MATCHES "Ninja Multi-Config")
+  set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "" FORCE)
+  set(CMAKE_DEFAULT_BUILD_TYPE "Release" CACHE STRING "" FORCE)
+endif()
+
+option(ENABLE_ASAN "Enable AddressSanitizer in Debug" OFF)
 
 # Suppress warnings about deprecated is_trivial_v in C++26
 if(CMAKE_CXX_STANDARD GREATER_EQUAL 26)
@@ -21,4 +26,4 @@ target_include_directories(
 )
 
 add_subdirectory(commandline)
-add_subdirectory(test)
+add_subdirectory(examples)
