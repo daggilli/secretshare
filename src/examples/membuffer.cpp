@@ -43,7 +43,7 @@ int main() {
 
   std::println("JOINED: {}\n", std::string(joinbuffer.get(), joinbuffer.get() + len));
 
-  // providing fewer than K shares does not reconsitute the shared secret
+  // providing fewer than K shares does not reconstitute the shared secret
   inbufferv.pop_back();
   inputPoints.pop_back();
 
